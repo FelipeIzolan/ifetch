@@ -12,8 +12,8 @@ CYAN='[0;36m'
 WHITE='[0;37m'
 RESET='[0m'
 
-ID=$(($RANDOM % 808 + 1))
-SPRITE=$(cat "$(dirname $0)/colorscripts/${ID}" | sed -e 's/$/[0m/g')
+PID=$(($RANDOM % 808 + 1))
+SPRITE=$(cat "$(dirname $0)/colorscripts/${PID}" | sed -e 's/$/[0m/g')
 
 HOST_NAME=$(cat /sys/devices/virtual/dmi/id/product_name) 
 HOST_VERSION=$(cat /sys/devices/virtual/dmi/id/product_version)
