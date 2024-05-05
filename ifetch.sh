@@ -13,7 +13,6 @@ WHITE='[0;37m'
 RESET='[0m'
 
 PID=$(($RANDOM % 808 + 1))
-SPRITE=$(cat "$(dirname $0)/colorscripts/${PID}" | sed -e 's/$/[0m/g')
 
 HOST_NAME=$(cat /sys/devices/virtual/dmi/id/product_name) 
 HOST_VERSION=$(cat /sys/devices/virtual/dmi/id/product_version)
@@ -21,7 +20,8 @@ TOTAL_MEMORY=$(free -m | awk 'NR==2 {print $2}')
 USAGE_MEMORY=$(free -m | awk 'NR==2 {print $3}')
 COLOR="$BLACK $RED $GREEN $YELLOW $BLUE $PURPLE $CYAN $WHITE $RESET"
 
-out=$(
+sprite=(); readarray -t sprite <<< $(cat "$(dirname $0)/colorscripts/${PID}" | sed -e 's/$/[0m/g')
+info=(); readarray -t info <<< $(
 cat << EOF
 # ${PURPLE}$USER@$HOSTNAME${RESET}
 ├─ ${BLUE}os${RESET}: $ID
@@ -32,8 +32,15 @@ cat << EOF
 EOF
 )
 
-out=$(gum style --margin "0 2" "${out}")
-out=$(gum join --align center --horizontal "${SPRITE}" "${out}")
-out=$(gum style --margin "0 2" "${out}")
+cs=$(((${#sprite[@]} - 7) / 2))
 
-echo "${out}"
+printf "\n\n"
+for ((i=0; i <= ${#sprite[@]}; i++))
+do
+  line="  ${sprite[i]}"
+  if [ $i -ge $cs ]
+  then
+    line+="  ${info[$(($i-$cs))]}"
+  fi
+  printf "$line\n"
+done

@@ -4,9 +4,7 @@
 
 ## 🚀 Dependencies
 - shell (bash, zsh, ...)
-- gum (charmbracelet/gum)
 
 ## 📜 License
 - [ifetch](https://github.com/FelipeIzolan/ifetch) - MIT
-- [gum](https://github.com/charmbracelet/gum) - MIT
 - [pokemon-colorscripts](https://gitlab.com/phoneybadger/pokemon-colorscripts) - MIT 
