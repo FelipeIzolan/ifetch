@@ -56,6 +56,11 @@ add() {
     return
   fi
 
+  if [[ "$1" == "terminal" ]]; then
+    FETCH="${FETCH}$(line "Terminal" "$TERM")"
+    return
+  fi
+  
   if [[ "$1" == "memory" ]]; then
     TOTAL_MEMORY=$(free -m | awk 'NR==2 {print $2}')
     USAGE_MEMORY=$(free -m | awk 'NR==2 {print $3}')
@@ -94,11 +99,12 @@ add "host"
 add "kernel"
 add "uptime"
 add "shell"
+add "terminal"
 add "memory"
 add "swap"
-# add "cpu"
-# add "local ip"
-# add "locale"
+add "cpu"
+add "local ip"
+add "locale"
 add "color" # end
 
 ###############################################################
